@@ -1,0 +1,38 @@
+body {
+  background-color: white;;
+}
+
+#messagebox {
+  margin: auto;
+  position: relative;
+  top: 100px;
+  width: 50%;
+  height: 200px;
+  background-color: #d9d9d9;
+}
+
+p {
+  position:relative;
+  top:25%;
+  text-align: center;
+  font-size: 25px;
+  color: black;
+  text-shadow: 2px 2px #878787;
+}
+
+table {
+  margin: auto;
+  position: relative;
+  top: 150px;
+  text-align:center;
+}
+
+.class1 {
+  font-size: 30px;
+}
+
+td{
+  padding-left:100px;
+  padding-right:100px;
+  padding-bottom:50px;
+}

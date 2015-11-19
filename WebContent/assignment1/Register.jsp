@@ -7,27 +7,29 @@
 <title>Registration</title>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 
-        <link rel="stylesheet" href="css/style2.css">
+        <link rel="stylesheet" href="/comp3095/assignment1/css/style2.css">
 </head>
   <body>
 
     <div id="hmenu"> 
 <ul> Message Board
-  <li><a href="index.html">Home</a></li> 
-  <li><a href="Posts.jsp">Posts</a></li> 
-  <li><a href="admin.jsp">Admin</a></li> 
+  <li><a href="/comp3095/assignment1/Home.html">Home</a></li> 
+  <li><a href="/comp3095/assignment1/Posts.jsp">Posts</a></li> 
+  <li><a href="/comp3095/assignment1/admin.jsp">Admin</a></li> 
 </ul>   
 </div> 
 
 <div id="formmenu">
   <h1>New User Registration</h1>
+  <hr></hr>
   <form method="post" action="/comp3095/Register">
     <table>
       <tr>
         <td class="test">First Name</td>
         <td>
-          <input type="text" name="firstname" value="${cookie1}" ></input></br>
-          <label>${errorMessage1}</label>
+          <input type="text" name="firstname" value="${cookie1}" ></input><label>${errorFirstName}</label><br>
+          <label>Must contain only alphabets. Spaces are not allowed.</label>
+    
         </td>
       </tr>
 
@@ -35,7 +37,8 @@
         <td class="test">Last Name</td>
         <td>
           <input type="text" name="lastname" value="${cookie2}" ></input></br>
-          <label>${errorMessage2}</label>
+          <label>Must contain only alphabets. Spaces are not allowed.</label>
+          <label>${errorLastName}</label>
         </td>
       </tr>
 
@@ -43,7 +46,8 @@
         <td class="test">E-mail Address</td>
         <td>
           <input type="text" name="email" value="${cookie3}" ></input></br>
-          <label>${errorMessage3}</label>
+          <label>Must be a valid e-mail address</label>
+          <label>${errorEmail}</label>
         </td>
       </tr>
 
@@ -51,7 +55,8 @@
         <td class="test">Re-Enter E-mail Address</td>
         <td>
           <input type="text" name="reemail"></input></br>
-          <label>${errorMessage4}</label>
+          <label>Must be a valid e-mail address</label>
+          <label>${errorReemail}</label>
         </td>
       </tr>
 
@@ -59,7 +64,8 @@
         <td class="test">Telephone #</td>
         <td>
           <input type="text" name="phone" value="${cookie4}" ></input></br>
-          <label>${errorMessage5}</label>
+          <label>Must only contain numbers.</label>
+          <label>${errorPhone}</label>
         </td>
       </tr>
 
@@ -67,13 +73,15 @@
         <td class="test">Password</td>
         <td>
           <input type="password" name="pass"></input></br>
-          <label>${errorMessage6}</label>
+          <label>Your account password. Must contain at least one letter and number.</label>
+          <label>${errorPass}</label>
       </tr>
       <tr>
         <td class="test">Re-Enter Password</td>
         <td>
           <input type="password" name="repass"></input></br>
-          <label>${errorMessage7}</label>
+          <label>Your account password. Must contain at least one letter and number.</label>
+          <label>${errorRepass}</label>
       </tr>
 
       <tr>

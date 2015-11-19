@@ -1,3 +1,5 @@
+
+
 div#hmenu { 
    margin: 0; 
    padding: .4em 0 .3em 0; 
@@ -31,6 +33,20 @@ div#hmenu ul li {
    display: inline; 
 } 
 
+div#hmenu li#logged
+{
+	float:right;
+	margin-top:7px;
+	margin-right:10px;
+	font-size: 12px;
+	font-weight: normal;
+}
+div#hmenu ul a#log
+{
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: normal;
+}
 div#hmenu ul a:link{ 
    margin: 0; 
    padding: .3em .4em .3em .4em; 
@@ -67,34 +83,24 @@ div#hmenu ul a:hover{
    color: white; 
    background-color: black; 
 }
-h3
-{
+h1{
   text-align:center;
-  position: relative;
-  right: 100px;
-  margin-top: 50px;
-}
-#loginmenu table
-{
-  margin: auto;
-  margin-top: 40px;
 }
 
-#loginmenu td{
-  padding-left: 40px;
-  padding-bottom: 20px;
+table{
+  margin: auto;
 }
-#loginmenu input
-{
-  margin-top:10px;
+
+td{
+	padding: 10px;
 }
-#logintr td
-{
-  position:relative;
-  left: 100px;
-  
-}
+
 label{
   font-size:12px;
-  color: red;
+  color: black;
 }
+
+.test{
+	text-align: right;
+}
+

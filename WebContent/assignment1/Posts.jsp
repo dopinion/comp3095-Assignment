@@ -7,15 +7,15 @@
 <title>Posts page</title>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 
-        <link rel="stylesheet" href="css/style2.css">
+        <link rel="stylesheet" href="/comp3095/assignment1/css/style2.css">
 </head>
 <body>
 <%if(session.getAttribute("user") != null) { %>
 <div id="hmenu"> 
 <ul> Message Board
-  <li><a href="index.html">Home</a></li> 
+  <li><a href="/comp3095/assignment1/Home.html">Home</a></li> 
   <li>
-  <a href="Posts.jsp">Posts</a>
+  <a href="/comp3095/assignment1/Posts.jsp">Posts</a>
   </li> 
   <li><a href="admin.jsp">Admin</a></li> 
   <%if(session.getAttribute("user") != null) { %>
@@ -43,6 +43,6 @@
 	<hr>
 	<p>This page will be popualted in a future assignment.</p>
 </div>
-<%}else{ response.sendRedirect("index.html");}%> 
+<%}else{ response.sendRedirect("Home.html");}%> 
 </body>
 </html>

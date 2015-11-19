@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,14 +56,14 @@ public class LoginServ extends HttpServlet {
 		String password = request.getParameter("password");
 		PreparedStatement ps = null;
 		ResultSet myRs;
-		boolean status = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			//Get a connection to the database
 			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "admin", "admin");
-		
+
 			//Create a sql Statement
-			Statement myStmt = myConn.createStatement();
+			//Statement myStmt = myConn.createStatement();
+			
 			//Execute SQL query
 			ps = myConn.prepareStatement("select * from user where username=? and password=?");
 			ps.setString(1, user);  
@@ -77,14 +76,14 @@ public class LoginServ extends HttpServlet {
 	        	session.setAttribute("user", user);
 	        	request.setAttribute("WelcomeMessage", "Welcome " + session.getAttribute("user"));
 	        	RequestDispatcher requestDispatcher;
-				requestDispatcher = request.getRequestDispatcher("/Posts.jsp");
+				requestDispatcher = request.getRequestDispatcher("assignment1/Posts.jsp");
 				requestDispatcher.forward(request, response);
 	        }
 	        else
 	        {
 	        	request.setAttribute("errorLogin", "*Incorrect user or password");
 	        	RequestDispatcher requestDispatcher;
-				requestDispatcher = request.getRequestDispatcher("/login.jsp");
+				requestDispatcher = request.getRequestDispatcher("assignment1/login.jsp");
 				requestDispatcher.forward(request, response);
 	        }
 	  

@@ -16,6 +16,8 @@ public class Validations {
 	Boolean pas = false;
 	Boolean repas = false;
 	Boolean everything = false;
+	Boolean pt = false;
+	Boolean pb = false;
 	
 	//REGEX validations
 	String emailregex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -23,6 +25,44 @@ public class Validations {
 	String phoneregex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
 	String passregex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
 	
+	public String checkPostTitle(String title)
+	{
+		if(title.isEmpty())
+		{
+			return "Post title is empty";
+		}
+		else
+		{
+			pt = true;
+			return "";
+		}
+	}
+	
+	public String checkPostBody(String body)
+	{
+		if(body.isEmpty())
+		{
+			return "Post body is empty";
+		}
+		else
+		{
+			pb = true;
+			return "";
+		}
+	}
+	
+	public boolean validatePost()
+	{
+		if(pt == true && pb == true)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
 	public String checkFirstName(String firstname)
 	{
 		String message;

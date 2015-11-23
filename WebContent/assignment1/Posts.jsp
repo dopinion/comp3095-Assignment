@@ -12,6 +12,7 @@
 <body>
 <%if(session.getAttribute("user") != null) { %>
 <div id="hmenu"> 
+
 <ul> Message Board
   <li><a href="/comp3095/assignment1/Home.html">Home</a></li> 
   <li>
@@ -41,7 +42,9 @@
 <div>
 	<h2>Posts</h2>
 	<hr>
-	<p>This page will be popualted in a future assignment.</p>
+	<table border ="1">
+		${createPost}
+	</table>
 </div>
 <%}else{ response.sendRedirect("Home.html");}%> 
 </body>

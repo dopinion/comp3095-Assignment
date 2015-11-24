@@ -76,7 +76,7 @@ public class LoginServ extends HttpServlet {
 	        	session.setAttribute("user", user);
 	        	request.setAttribute("WelcomeMessage", "Welcome " + session.getAttribute("user"));
 	        	RequestDispatcher requestDispatcher;
-				requestDispatcher = request.getRequestDispatcher("assignment1/Posts.jsp");
+				requestDispatcher = request.getRequestDispatcher("assignment1/Posts");
 				requestDispatcher.forward(request, response);
 	        }
 	        else

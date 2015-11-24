@@ -1,11 +1,6 @@
 package assignment1;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.io.PrintWriter;
-import java.sql.Array;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -16,19 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
-
 /**
- * Servlet implementation class Post
+ * Servlet implementation class Comment
  */
-@WebServlet("/Post")
-public class Post extends HttpServlet {
+@WebServlet("/Comment")
+public class Comment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Post() {
+    public Comment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,36 +30,52 @@ public class Post extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		// TODO Auto-generated method stub
+		
+		ConnectionUtil util = new ConnectionUtil();
+		Integer foo = Integer.parseInt(request.getParameter("id"));
+		request.setAttribute("id", request.getParameter("id"));
+		request.setAttribute("url", "/comp3095/Comment?id=" + request.getParameter("id"));
+		
+		try {
+			request.setAttribute("post",util.findPost(foo));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher requestDispatcher;
+		requestDispatcher = request.getRequestDispatcher("/assignment2/Comment.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Request NewPost parameters
-		request.getParameter("posttitle");
-		request.getParameter("postbody");
+		// TODO Auto-generated method stub
+		request.getParameter("id");
+		request.getParameter("commentbody");
 		
 		Validations validator = new Validations();
 		
-		validator.checkPostTitle(request.getParameter("posttitle"));
-		validator.checkPostBody(request.getParameter("postbody"));
+		validator.checkPostTitle(request.getParameter("commentit"));
 		
-		//Validate parameters to check for errors then display it to the user 
-		request.setAttribute("errorTitle", validator.checkPostTitle(request.getParameter("posttitle")));
-		request.setAttribute("errorBody", validator.checkPostTitle(request.getParameter("postbody")));
-			
-		//Enter in the database
+		request.setAttribute("errorComment", validator.checkComment(request.getParameter("commentbody")));
 		
 		HttpSession session = request.getSession(true);
 		String user = session.getAttribute("user").toString();
-		if(validator.validatePost() == true)
+		Integer x = Integer.parseInt(request.getParameter("id"));
+		
+		if(validator.validateComment())
 		{
+			
 			try {
 				ConnectionUtil util = new ConnectionUtil();
-				util.insertPost(request.getParameter("posttitle"), request.getParameter("postbody"), session.getAttribute("user"));
+				util.insertComment(request.getParameter("commentbody"),session.getAttribute("user"), x);
 				
 				UtilityHelper helper = new UtilityHelper();
 				
@@ -80,6 +89,7 @@ public class Post extends HttpServlet {
 					e.printStackTrace();
 				}
 				
+				
 				RequestDispatcher requestDispatcher;
 				requestDispatcher = request.getRequestDispatcher("/assignment1/Posts.jsp");
 				requestDispatcher.forward(request, response);
@@ -89,14 +99,24 @@ public class Post extends HttpServlet {
 			catch (Exception exc){
 				exc.printStackTrace();
 			}
+			
 		}
 		else{
+			ConnectionUtil util = new ConnectionUtil();
+			request.setAttribute("id", x);
+			try {
+				request.setAttribute("post",util.findPost(x));
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			RequestDispatcher requestDispatcher;
-			requestDispatcher = request.getRequestDispatcher("assignment2/NewPost.jsp");
+			requestDispatcher = request.getRequestDispatcher("assignment2/Comment.jsp");
 			requestDispatcher.forward(request, response);
 		}
-	
-		
 		
 	}
 

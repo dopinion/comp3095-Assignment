@@ -13,6 +13,10 @@
     <servlet-name>Register</servlet-name>
     <servlet-class>assignment1.Register</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>Comment</servlet-name>
+    <servlet-class>assignment1.Comment</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>assignment1.LoginServ</servlet-class>
@@ -26,17 +30,23 @@
     <servlet-class>assignment1.Post</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>ShowPost</servlet-name>
-  	<servlet-class>assignment1.ShowPost</servlet-class><load-on-startup>1</load-on-startup>
-  	<init-param>
-  		<param-name>config</param-name>
-  		<param-value>/WEB-INF/web.xml</param-value>
-  	</init-param>
-  	
-  </servlet><servlet-mapping>
-  	<servlet-name>ShowPost</servlet-name>
-  	<url-pattern>/assignment1/ShowPost</url-pattern>
-  </servlet-mapping><servlet-mapping>
+    <servlet-name>RemovePost</servlet-name>
+    <servlet-class>assignment1.RemovePost</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowPost</servlet-name>
+    <servlet-class>assignment1.ShowPost</servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Comment</servlet-name>
+    <url-pattern>/assignment1/Comment</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowPost</servlet-name>
+    <url-pattern>/assignment1/Posts</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
     <url-pattern>/assignment1/Post</url-pattern>
   </servlet-mapping>
@@ -52,5 +62,8 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/assignment1/Logout</url-pattern>
   </servlet-mapping>
-  
+  <servlet-mapping>
+    <servlet-name>RemovePost</servlet-name>
+    <url-pattern>/assignment1/Remove</url-pattern>
+  </servlet-mapping>
 </web-app>

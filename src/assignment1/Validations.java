@@ -18,12 +18,39 @@ public class Validations {
 	Boolean everything = false;
 	Boolean pt = false;
 	Boolean pb = false;
+	Boolean boolComment = false;
 	
 	//REGEX validations
 	String emailregex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 	String nameregex = "^[a-zA-Z_\\-]+$";
 	String phoneregex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
 	String passregex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+	
+	public String checkComment(String comment)
+	{
+		if(comment.isEmpty())
+		{
+			return "Comment body section is empty";
+		}
+		else
+		{
+			boolComment = true;
+			return "";
+		}
+	}
+	
+	public Boolean validateComment()
+	{
+		if(boolComment.equals(true))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	
+	}
 	
 	public String checkPostTitle(String title)
 	{

@@ -11,11 +11,11 @@
 
 </head>
 <body>
-<%if(session.getAttribute("user") != null) { response.sendRedirect("Posts.jsp");} else{ %>
+<%if(session.getAttribute("user") != null) { response.sendRedirect("Posts");} else{ %>
 <div id="hmenu">
   <ul> Message Board
     <li><a href="/comp3095/assignment1/Home.html">Home</a></li>
-    <li><a href="/comp3095/assignment1/Posts.jsp">Posts</a></li>
+    <li><a href="/comp3095/assignment1/Posts">Posts</a></li>
     <li><a href="/comp3095/assignment1/admin.jsp">Admin</a></li>
   </ul>
 </div>

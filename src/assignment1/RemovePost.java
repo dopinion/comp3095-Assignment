@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ShowPost
+ * Servlet implementation class RemovePost
  */
-@WebServlet("/ShowPost")
-public class ShowPost extends HttpServlet {
+@WebServlet("/RemovePost")
+public class RemovePost extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowPost() {
+    public RemovePost() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +31,25 @@ public class ShowPost extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request,response);
+		
+		HttpSession session = request.getSession(true);
+		if(session.getAttribute("user").equals(request.getParameter("username"))){
+			ConnectionUtil util = new ConnectionUtil();
+			try {
+				util.removePost(request.getParameter("id"));
+				util.removeComments(request.getParameter("id"));
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		RequestDispatcher requestDispatcher;
+		requestDispatcher = request.getRequestDispatcher("/assignment1/Posts");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**
@@ -39,25 +57,7 @@ public class ShowPost extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UtilityHelper helper = new UtilityHelper();
-		HttpSession session = request.getSession(true);
-		
-		
-		try {
-			request.setAttribute("createPost", helper.buildDivs(session.getAttribute("user")));
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	
-	
-		RequestDispatcher requestDispatcher;
-		requestDispatcher = request.getRequestDispatcher("/assignment1/Posts.jsp");
-		requestDispatcher.forward(request, response);
+		doGet(request, response);
 	}
 
 }

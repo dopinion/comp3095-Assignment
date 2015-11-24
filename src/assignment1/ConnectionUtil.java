@@ -3,14 +3,21 @@ package assignment1;
 import java.awt.List;
 import java.sql.Array;
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Date;
+
 
 public class ConnectionUtil {
 	
@@ -23,19 +30,36 @@ public class ConnectionUtil {
 		Class.forName(driver);
 		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
 		
-		//Create a sql Statement
-		Statement myStmt = myConn.createStatement();
-		
 		//Create prepared statement
-		PreparedStatement ps = myConn.prepareStatement("insert into posts(title, body, username) values (?, ?, ?)");
+		PreparedStatement ps = myConn.prepareStatement("insert into posts(title, body, username, date) values (?, ?, ?, ?)");
+		
+		DateFormat dateFormat = new SimpleDateFormat(" '-' yyyy/MM/dd '-' h:mmaaa");
+		Date date = new Date();
 		
 		ps.setString(1, title);
 		ps.setString(2, body);
 		ps.setString(3, object.toString());
+		ps.setString(4, dateFormat.format(date));
+
 		
 		ps.executeUpdate();
 		//ps.close();
 	
+	}
+	
+	public void insertComment(String comment, Object object, Integer id) throws ClassNotFoundException, SQLException
+	{
+		Class.forName(driver);
+		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		
+		//Create a sql Statement
+		Statement myStmt = myConn.createStatement();
+		
+		//Create prepared statement
+		DateFormat dateFormat = new SimpleDateFormat(" '-' yyyy/MM/dd '-' h:mmaaa");
+		Date date = new Date();
+		myStmt.executeUpdate("insert into comments(body, username, idPosts, date) values ('" + comment + "', '" + object.toString() + "', '" + id + "', '" + dateFormat.format(date).toString() + "')");
+
 	}
 	public void registerUser(String user,String password,String email,String telephone,String firstname,String lastname) throws SQLException, ClassNotFoundException
 	{
@@ -50,6 +74,42 @@ public class ConnectionUtil {
 				+ "(username, password, email, telephone, firstname, lastname)"
 				+ "values ('"+user+"', '"+password+"', '"+email+"', '"+telephone+"', '"+firstname+"', '"+lastname+"')";
 		myStmt.executeUpdate(sql);
+	}
+	
+	public String findPost(int id) throws ClassNotFoundException, SQLException
+	{
+		String body = null;
+		Class.forName(driver);
+		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		
+		//Create a sql Statement
+		Statement myStmt = myConn.createStatement();
+		//Execute SQL query
+		ResultSet myRs = myStmt.executeQuery("select * from posts where idPosts='" + id + "'");
+		
+		while(myRs.next())
+		{
+			body = myRs.getString("body");
+		}
+		return body;
+		
+	}
+	
+	public Timestamp findDate(int id) throws ClassNotFoundException, SQLException
+	{
+		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		Timestamp stamp = null;
+	
+		//Create a sql Statement
+		Statement myStmt = myConn.createStatement();
+		//Execute SQL query
+		ResultSet myRs = myStmt.executeQuery("select * from posts where idPosts='" + id + "'");
+		
+		while(myRs.next())
+		{
+			stamp = myRs.getTimestamp("date");
+		}
+		return stamp;
 	}
 
 	public boolean findUser (String user) throws ClassNotFoundException, SQLException
@@ -75,41 +135,39 @@ public class ConnectionUtil {
 		{
 			return false;
 		}
-		
-	
 
 	}
 	
-	//Add a method that returns Post Title, Author, and Post body
-	
-	public ArrayList<Object[]> getPost() throws SQLException, ClassNotFoundException
+	//remove a Post
+	public void removePost(String id) throws SQLException, ClassNotFoundException
 	{
-		//Create an ArrayList
-		
-		ArrayList <Object[]> result = new ArrayList<Object[]>();
 		
 		Class.forName(driver);
-		
 		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		
+		//Create a sql Statement
 		Statement myStmt = myConn.createStatement();
 		
-		ResultSet myRs = myStmt.executeQuery("select title, body, username from posts");
 		
-		int count = myRs.getMetaData().getColumnCount();
+		myStmt.executeUpdate("delete from posts where idPosts='" + id + "'");
 		
-		while(myRs.next())
-		{
-			//Creating an object array that saves the row
-			Object[] row = new Object[count];
-			for(int i=0; i < count; i++)
-			{
-				row[i] = myRs.getObject(i+1);
-			}
-			result.add(row);
-		}
-		return result;
-	
 	}
+	//remove all comments
+	public void removeComments(String id) throws SQLException, ClassNotFoundException
+	{
+		
+		Class.forName(driver);
+		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		
+		//Create a sql Statement
+		Statement myStmt = myConn.createStatement();
+		
+		
+		myStmt.executeUpdate("delete from comments where idPosts='" + id + "'");
+		
+	}
+	
+	//Add a method that returns Post Title, Author, and Post body
 	
 	public ArrayList<HashMap<String,Object>> getPosts() throws SQLException, ClassNotFoundException
 	{
@@ -122,7 +180,7 @@ public class ConnectionUtil {
 		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
 		Statement myStmt = myConn.createStatement();
 		
-		ResultSet myRs = myStmt.executeQuery("select title, body, username from posts");
+		ResultSet myRs = myStmt.executeQuery("select idPosts, title, body, username, date from posts");
 		ResultSetMetaData md = myRs.getMetaData();
 		
 		//Count number of columns in the post table
@@ -143,6 +201,40 @@ public class ConnectionUtil {
 		return list;
 	
 	}
+	
+	public ArrayList<HashMap<String,Object>> getComments() throws SQLException, ClassNotFoundException
+	{
+		//Create an Hashmap	
+		
+		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
+
+		Class.forName(driver);
+		
+		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		Statement myStmt = myConn.createStatement();
+		
+		ResultSet myRs = myStmt.executeQuery("select idcomments, body, username, idPosts, date from comments");
+		ResultSetMetaData md = myRs.getMetaData();
+		
+		//Count number of columns in the post table
+		int count = md.getColumnCount();
+		
+		while(myRs.next())
+		{
+			//Creating an object array that saves the row
+			HashMap<String,Object> row = new HashMap<String,Object>(count);
+			
+		
+			for(int i=1; i <= count; i++)
+			{
+				row.put(md.getColumnName(i), myRs.getObject(i));
+			}
+			list.add(row);
+		}
+		return list;
+	
+	}
+	
 
 
 }

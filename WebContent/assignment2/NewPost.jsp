@@ -15,30 +15,38 @@
 <div id="hmenu">
   <ul> Message Board
     <li><a href="/comp3095/assignment1/Home.html">Home</a></li>
-    <li><a href="/comp3095/assignment1/Posts.jsp">Posts</a></li>
+    <li><a href="/comp3095/assignment1/Posts">Posts</a></li>
     <li><a href="/comp3095/assignment1/admin.jsp">Admin</a></li>
+    <%if(session.getAttribute( "user")!=null) { %>
+            <li id="logged">Logged in as ${sessionScope.user}
+              <a id="log" href="/comp3095/Logout"> Logout</a>
+            </li>
+            <%}else{ %>
+              <li id="logged">
+                <a id="log" href="/comp3095/login.jsp"> Login</a>
+              </li>
+              <%} %>
   </ul>
 </div>
 <%--So lets create a form for the user to enter Post title and Post Body --%>
 <div id="newpostmenu">
-    <h3>New Post</h3>
+    <h2 id="title">New Post</h2><hr>
     <form method=post action=/comp3095/Post>
-      <table>
+      <table id="commentTable">
         <tr>
-          <td>Post Title</td>
           <td>
-            <input type="text" name="posttitle"></input>
+          	<p>Post Title</p>
+            <input type="text" name="posttitle" value="${postTitleCookie}" size="50"></input>
           </td>
         </tr>
         <tr>
-          <td></td>
           <td>
-            <textarea name="postbody" placeholder="Input post text. Max 3000 characters." maxlength="3000" rows="5" cols="50"></textarea>
+            <textarea name="postbody" placeholder="Input post text. Max 3000 characters." maxlength="3000" rows="5" cols="75">${postBodyCookie}</textarea>
           </td>
         </tr>
         <tr id=logintr>
           <td>
-            <input type="submit" name="postit" value="Publish" class="primary-btn"></input>
+            <input type="submit" name="postit" value="Submit" class="primary-btn"></input>
             <label>${errorTitle}</label>
             <label>${errorBody}</label>
           </td>

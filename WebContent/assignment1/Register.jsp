@@ -23,7 +23,7 @@
   <h1>New User Registration</h1>
   <hr></hr>
   <form method="post" action="/comp3095/Register">
-    <table>
+    <table id="registerPage">
       <tr>
         <td class="test">First Name</td>
         <td>

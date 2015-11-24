@@ -26,10 +26,17 @@ public class UtilityHelper {
 		String tr = "<tr class='postTableRow'><td>";
 		String div = "<div class='createPost'>";
 		String h4 = "<h4 class='posth4'>";
+		String table = "<table class='postTable'>";
 		String finish = "";
 		String removeLink ="";
 		String commentLink ="";
 		String commentBuild = "";
+		
+		/*
+	 	<table id="postTable" border="1">
+          ${createPost}
+        </table>
+		 */
 		
 		
 		
@@ -38,7 +45,7 @@ public class UtilityHelper {
 			
 			if(postList.get(i).get("username").toString().equals(user.toString()))
 			{
-				removeLink = "| <a href='/comp3095/assignment1/Remove?id=" + postList.get(i).get("idPosts") + "&username=" +postList.get(i).get("username")+"'>Remove</a>";
+				removeLink = "<a class='commentOption' href='/comp3095/assignment1/Remove?id=" + postList.get(i).get("idPosts") + "&username=" +postList.get(i).get("username")+"'>|Remove</a>";
 			}
 			
 			//Create a loop that creates comments
@@ -46,23 +53,24 @@ public class UtilityHelper {
 			{
 				if(postList.get(i).get("idPosts").equals(commentList.get(a).get("idPosts")))
 				{
-					commentBuild += "<p>" +commentList.get(a).get("username") + " commented, \"" + commentList.get(a).get("body") + "\"" + commentList.get(a).get("date") + "</p>";
+					commentBuild += "<p class='commentText'>" +commentList.get(a).get("username") + " commented, \"" + commentList.get(a).get("body") + "\"" + commentList.get(a).get("date") + "</p><hr>";
 				}
 				
 				
 			}
 			
-				finish += tr + div + 
-				h4 + postList.get(i).get("title").toString() + "</h4> " + "by " + postList.get(i).get("username") + postList.get(i).get("date") +  "<br>" +
-				postList.get(i).get("body") + "<br><br>" 
-				
-				+ commentBuild + " <a href='/comp3095/assignment1"
-						+ "/Comment?id=" + postList.get(i).get("idPosts") + "'>Comment</a> "
+				finish += table + tr + div + 
+				h4 + postList.get(i).get("title").toString() + "</h4> " + "<p class='byText'>by " + postList.get(i).get("username") + postList.get(i).get("date")  +"</p><hr>"+ "<p class='postText'>" +
+				postList.get(i).get("body") + "</p><hr>" +
+			     commentBuild + "</td></tr>" + tr + 
+			     " <a class='commentOption' href='/comp3095/assignment1/Comment?id=" + postList.get(i).get("idPosts") + "'>Comment</a>" 
 				
 				+ removeLink
-						+ "</div></tr>";
+						+ "</div></td></tr></table>";
 				
-			commentBuild = ""; //set commentBuild back to empty
+				
+			//set these values to null in order to use again 
+			commentBuild = "";
 		}
 
 		return finish;

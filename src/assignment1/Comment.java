@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +39,8 @@ public class Comment extends HttpServlet {
 		request.setAttribute("url", "/comp3095/Comment?id=" + request.getParameter("id"));
 		
 		try {
-			request.setAttribute("post",util.findPost(foo));
+			request.setAttribute("post","\"" + util.findPost(foo) + "\"");
+			request.setAttribute("title", util.findPostTitle(foo));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,6 +61,13 @@ public class Comment extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.getParameter("id");
 		request.getParameter("commentbody");
+		
+		//Cookies for sticky form
+		
+		Cookie commentCookie = new Cookie("commentBody", request.getParameter("commentbody"));
+		commentCookie.setMaxAge(60*60*60);
+		response.addCookie(commentCookie);
+		request.setAttribute("commentBodyCookie", commentCookie.getValue());
 		
 		Validations validator = new Validations();
 		
@@ -103,9 +112,13 @@ public class Comment extends HttpServlet {
 		}
 		else{
 			ConnectionUtil util = new ConnectionUtil();
-			request.setAttribute("id", x);
+			Integer foo = Integer.parseInt(request.getParameter("id"));
+			request.setAttribute("id", request.getParameter("id"));
+			request.setAttribute("url", "/comp3095/Comment?id=" + request.getParameter("id"));
+			
 			try {
-				request.setAttribute("post",util.findPost(x));
+				request.setAttribute("post","\"" + util.findPost(foo) + "\"");
+				request.setAttribute("title", util.findPostTitle(foo));
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

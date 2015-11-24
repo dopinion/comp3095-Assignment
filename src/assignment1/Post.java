@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,14 +50,27 @@ public class Post extends HttpServlet {
 		request.getParameter("posttitle");
 		request.getParameter("postbody");
 		
+		//Cookies for sticky pages
+		//Cookies for sticky form
+				Cookie postTitleCookie = new Cookie("posttitle", request.getParameter("posttitle"));
+				postTitleCookie.setMaxAge(60*60*60);
+				response.addCookie(postTitleCookie);
+				request.setAttribute("postTitleCookie", postTitleCookie.getValue());
+				
+				Cookie postBodyCookie = new Cookie("postbody", request.getParameter("postbody"));
+				postBodyCookie.setMaxAge(60*60*60);
+				response.addCookie(postBodyCookie);
+				request.setAttribute("postBodyCookie", postBodyCookie.getValue());
+		
 		Validations validator = new Validations();
 		
 		validator.checkPostTitle(request.getParameter("posttitle"));
 		validator.checkPostBody(request.getParameter("postbody"));
 		
+
 		//Validate parameters to check for errors then display it to the user 
 		request.setAttribute("errorTitle", validator.checkPostTitle(request.getParameter("posttitle")));
-		request.setAttribute("errorBody", validator.checkPostTitle(request.getParameter("postbody")));
+		request.setAttribute("errorBody", validator.checkPostBody(request.getParameter("postbody")));
 			
 		//Enter in the database
 		

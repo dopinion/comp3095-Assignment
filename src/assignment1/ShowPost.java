@@ -41,9 +41,14 @@ public class ShowPost extends HttpServlet {
 		// TODO Auto-generated method stub
 		UtilityHelper helper = new UtilityHelper();
 		HttpSession session = request.getSession(true);
+		ConnectionUtil util = new ConnectionUtil();
 		
 		
 		try {
+			if(util.countRows().equals(true))
+			{
+				request.setAttribute("noPost", "<h5 id='noPost'>There are no posts. Please create a new post </h5>" + "<a href='/comp3095/assignment2/NewPost.jsp'>Click here.</a>");
+			}
 			request.setAttribute("createPost", helper.buildDivs(session.getAttribute("user")));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

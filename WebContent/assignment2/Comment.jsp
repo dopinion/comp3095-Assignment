@@ -17,23 +17,39 @@
     <li><a href="/comp3095/assignment1/Home.html">Home</a></li>
     <li><a href="/comp3095/assignment1/Posts">Posts</a></li>
     <li><a href="/comp3095/assignment1/admin.jsp">Admin</a></li>
+    <%if(session.getAttribute("user")!=null) { %>
+            <li id="logged">Logged in as ${sessionScope.user}
+              <a id="log" href="/comp3095/Logout"> Logout</a>
+            </li>
+            <%}else{ %>
+              <li id="logged">
+                <a id="log" href="/comp3095/login.jsp"> Login</a>
+              </li>
+              <%} %>
   </ul>
 </div>
 <%--So lets create a form for the user to enter Post title and Post Body --%>
 <div id="newcommentmenu">
-    <h3>Commenting on Post id = ${id} </h3>
-    <div><p>${post}</p></div>
     <form method=post action="${url}">
-      <table>
+    <h2 id="title">Comment</h2><hr>
+      <table id="commentTable">
+      	<tr>
+      		<td><h3>${title}</h3></td>
+      	</tr>
+     	<tr>
+     		<td>
+     			<p>${post}</p>
+     		</td>
+     	</tr>
         <tr>
-          <td></td>
           <td>
-            <textarea name="commentbody" placeholder="Input comment text. Max 10000 characters." maxlength="10000" rows="5" cols="50"></textarea>
+            <textarea name="commentbody" placeholder="Input comment text. Max 10000 characters." maxlength="10000" rows="5" cols="75">${commentBodyCookie}</textarea>
           </td>
         </tr>
         <tr id=logintr>
+  
           <td>
-            <input type="submit" name="commentit" value="Publish" class="primary-btn"></input>
+            <input type="submit" name="commentit" value="Submit" class="primary-btn"></input>
             <label>${errorComment}</label>
           </td>
     

@@ -13,7 +13,6 @@
   <body>
     <%if(session.getAttribute( "user")!=null) { %>
       <div id="hmenu">
-
         <ul> Message Board
           <li><a href="/comp3095/assignment1/Home.html">Home</a></li>
           <li>
@@ -22,39 +21,27 @@
           <li><a href="admin.jsp">Admin</a></li>
           <%if(session.getAttribute( "user")!=null) { %>
             <li id="logged">Logged in as ${sessionScope.user}
-
-
               <a id="log" href="/comp3095/Logout"> Logout</a>
-
-
             </li>
             <%}else{ %>
-
               <li id="logged">
-
-
                 <a id="log" href="/comp3095/login.jsp"> Login</a>
-
-
               </li>
               <%} %>
         </ul>
       </div>
-      <div>
-        <table id="titleTable">
-          <tr>
-            <td id="titletd">
+      <div id="postDiv">
+       
               <h2 id="titlePost">Posts</h2>
-            </td>
-            <td id ="writePost">
+     
               <a id="postLink" href="/comp3095/assignment2/NewPost.jsp">Write a post</a>
-            </td>
-          </tr>
-        </table>
-        <hr>
-        <table id="postTable" border="1">
+
+         <hr>
+         
+         <p>${noPost}</p>
+       
           ${createPost}
-        </table>
+  
       </div>
       <%}else{ response.sendRedirect( "Home.html");}%>
   </body>

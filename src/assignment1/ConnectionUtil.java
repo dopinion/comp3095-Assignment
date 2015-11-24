@@ -43,7 +43,7 @@ public class ConnectionUtil {
 
 		
 		ps.executeUpdate();
-		//ps.close();
+		myConn.close();
 	
 	}
 	
@@ -59,7 +59,7 @@ public class ConnectionUtil {
 		DateFormat dateFormat = new SimpleDateFormat(" '-' yyyy/MM/dd '-' h:mmaaa");
 		Date date = new Date();
 		myStmt.executeUpdate("insert into comments(body, username, idPosts, date) values ('" + comment + "', '" + object.toString() + "', '" + id + "', '" + dateFormat.format(date).toString() + "')");
-
+		myConn.close();
 	}
 	public void registerUser(String user,String password,String email,String telephone,String firstname,String lastname) throws SQLException, ClassNotFoundException
 	{
@@ -74,6 +74,7 @@ public class ConnectionUtil {
 				+ "(username, password, email, telephone, firstname, lastname)"
 				+ "values ('"+user+"', '"+password+"', '"+email+"', '"+telephone+"', '"+firstname+"', '"+lastname+"')";
 		myStmt.executeUpdate(sql);
+		myConn.close();
 	}
 	
 	public String findPost(int id) throws ClassNotFoundException, SQLException
@@ -91,9 +92,52 @@ public class ConnectionUtil {
 		{
 			body = myRs.getString("body");
 		}
+		myConn.close();
 		return body;
 		
 	}
+	
+	public String findPostTitle(int id) throws ClassNotFoundException, SQLException
+	{
+		String title = null;
+		Class.forName(driver);
+		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		
+		//Create a sql Statement
+		Statement myStmt = myConn.createStatement();
+		//Execute SQL query
+		ResultSet myRs = myStmt.executeQuery("select * from posts where idPosts='" + id + "'");
+		
+		while(myRs.next())
+		{
+			title = myRs.getString("title");
+		}
+		myConn.close();
+		return title;
+		
+	}
+	
+	//Checks how many rows in the post table. if none, displays a warning to a user that there are no posts.
+	public Boolean countRows() throws ClassNotFoundException, SQLException
+	{
+		Class.forName(driver);
+		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
+		
+		//Create a sql Statement
+		Statement myStmt = myConn.createStatement();
+		//Execute SQL query
+		ResultSet myRs = myStmt.executeQuery("select * from posts");
+		
+		if(!myRs.next())
+		{
+			myConn.close();
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	
 	public Timestamp findDate(int id) throws ClassNotFoundException, SQLException
 	{
@@ -109,7 +153,9 @@ public class ConnectionUtil {
 		{
 			stamp = myRs.getTimestamp("date");
 		}
+		myConn.close();
 		return stamp;
+		
 	}
 
 	public boolean findUser (String user) throws ClassNotFoundException, SQLException
@@ -129,12 +175,15 @@ public class ConnectionUtil {
 		//finds user if it exists and returns a boolean
         if(myRs.next())
         {
+        	myConn.close();
         	return true;
         }
 		else
 		{
+			myConn.close();
 			return false;
 		}
+        
 
 	}
 	
@@ -150,6 +199,7 @@ public class ConnectionUtil {
 		
 		
 		myStmt.executeUpdate("delete from posts where idPosts='" + id + "'");
+		myConn.close();
 		
 	}
 	//remove all comments
@@ -164,6 +214,7 @@ public class ConnectionUtil {
 		
 		
 		myStmt.executeUpdate("delete from comments where idPosts='" + id + "'");
+		myConn.close();
 		
 	}
 	
@@ -198,6 +249,7 @@ public class ConnectionUtil {
 			}
 			list.add(row);
 		}
+		myConn.close();
 		return list;
 	
 	}
@@ -231,7 +283,9 @@ public class ConnectionUtil {
 			}
 			list.add(row);
 		}
+		myConn.close();
 		return list;
+		
 	
 	}
 	

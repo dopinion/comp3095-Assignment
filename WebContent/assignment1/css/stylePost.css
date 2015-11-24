@@ -95,10 +95,21 @@ div#hmenu ul a:hover{
   display: inline;
   font-weight:bold;
 }
+#postDiv
+{
+	margin-top:20px;
+}
 #titlePost{
-  margin: 1;
-  padding-left: 1em;
+  display:inline;
+  position:relative;
+  top:20px;
+  padding-left: 40px;
   font-weight:bold;
+}
+#postLink{
+	position:relative;
+	left:40px;
+	top:30px;
 }
 
 #writePost{
@@ -111,8 +122,15 @@ div#hmenu ul a:hover{
   top:40px;
 }
 
-#postTable{
+table.postTable{
   margin: auto;
+  margin-top:20px;
+  width:50%;
+  background-color:#FAFAFA;
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(168,168,168,1);
+-moz-box-shadow: 0px 0px 1px 1px rgba(168,168,168,1);
+box-shadow: 0px 0px 1px 1px rgba(168,168,168,1);
+  
 }
 
 td{
@@ -128,3 +146,25 @@ label{
 	text-align: right;
 }
 
+p.postText{
+	font-size: 85%;
+}
+p.commentText{
+	color:gray;
+	font-size: 80%;
+}
+a.commentOption{
+	display:inline;
+	position:relative;
+	left:85%;
+	font-size:80%;
+}
+p.byText{
+	display:inline;
+	color:gray;
+}
+#noPost{
+	margin-left:40px;
+	display:inline;
+	font-weight:bold;
+}

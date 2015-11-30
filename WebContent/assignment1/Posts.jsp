@@ -39,7 +39,7 @@
          <hr>
          
          <p>${noPost}</p>
-       
+    
           ${createPost}
   
       </div>

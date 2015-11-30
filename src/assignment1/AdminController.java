@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ShowPost
+ * Servlet implementation class AdminController
  */
-@WebServlet("/ShowPost")
-public class ShowPost extends HttpServlet {
+@WebServlet("/AdminController")
+public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowPost() {
+    public AdminController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,37 +39,43 @@ public class ShowPost extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UtilityHelper helper = new UtilityHelper();
+ 
 		HttpSession session = request.getSession();
+		UtilityHelper helper = new UtilityHelper();
 		ConnectionUtil util = new ConnectionUtil();
-		
-		
 		
 		if(session.getAttribute("user") != null)
 		{
-			try {
-				if(util.countRows().equals(true))
-				{
-					request.setAttribute("noPost", "<h5 id='noPost'>There are no posts. Please create a new post </h5>" + "<a href='/comp3095/assignment2/NewPost.jsp'>Click here.</a>");
+			if(session.getAttribute("user").equals("admin"))
+			{
+				try {
+					if(util.countRows().equals(true))
+					{
+						request.setAttribute("noPost", "<h5 id='noPost'>There are no posts. Please create a new post </h5>" + "<a href='/comp3095/assignment2/NewPost.jsp'>Click here.</a>");
+					}
+					request.setAttribute("createPost", helper.buildAdminDivs());
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				request.setAttribute("createPost", helper.buildDivs(session.getAttribute("user")));
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+
+				RequestDispatcher requestDispatcher;
+				requestDispatcher = request.getRequestDispatcher("/WEB-INF/AdminView.jsp");
+				requestDispatcher.forward(request, response);
 			}
-			
-			RequestDispatcher requestDispatcher;
-			requestDispatcher = request.getRequestDispatcher("/assignment2/Posts.jsp");
-			requestDispatcher.forward(request, response);
+			else
+			{
+				response.sendRedirect("/comp3095/assignment2/NotAnAdmin.jsp");
+			}
 		}
 		else
 		{
-			response.sendRedirect("/comp3095/assignment1/Home.html");
+			response.sendRedirect("login.jsp");
 		}
-	
 	}
 
 }

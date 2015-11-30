@@ -8,12 +8,14 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
+    <welcome-file>Home.html</welcome-file>
+    <welcome-file>/Home.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>Register</servlet-name>
     <servlet-class>assignment1.Register</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>Comment</servlet-name>
     <servlet-class>assignment1.Comment</servlet-class>
   </servlet>
@@ -34,9 +36,21 @@
     <servlet-class>assignment1.RemovePost</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>AdminController</servlet-name>
+    <servlet-class>assignment1.AdminController</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>ShowPost</servlet-name>
     <servlet-class>assignment1.ShowPost</servlet-class>
     <load-on-startup>4</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowAdminPost</servlet-name>
+    <servlet-class>assignment1.ShowAdminPost</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>RemovePostAdmin</servlet-name>
+  	<servlet-class>assignment1.RemovePostAdmin</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Comment</servlet-name>
@@ -65,5 +79,17 @@
   <servlet-mapping>
     <servlet-name>RemovePost</servlet-name>
     <url-pattern>/assignment1/Remove</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminController</servlet-name>
+    <url-pattern>/assignment2/AdminController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowAdminPost</servlet-name>
+    <url-pattern>/assignment1/ShowAdminPost</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RemovePostAdmin</servlet-name>
+  	<url-pattern>/assignment1/RemovePostAdmin</url-pattern>
   </servlet-mapping>
 </web-app>

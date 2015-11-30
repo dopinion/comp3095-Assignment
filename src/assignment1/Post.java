@@ -95,7 +95,7 @@ public class Post extends HttpServlet {
 				}
 				
 				RequestDispatcher requestDispatcher;
-				requestDispatcher = request.getRequestDispatcher("/assignment1/Posts.jsp");
+				requestDispatcher = request.getRequestDispatcher("/assignment2/Posts.jsp");
 				requestDispatcher.forward(request, response);
 			
 			}

@@ -134,6 +134,7 @@ public class ConnectionUtil {
 			return true;
 		}
 		else{
+			myConn.close();
 			return false;
 		}
 	}

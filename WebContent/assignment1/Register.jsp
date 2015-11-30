@@ -15,7 +15,7 @@
 <ul> Message Board
   <li><a href="/comp3095/assignment1/Home.html">Home</a></li> 
   <li><a href="/comp3095/assignment1/Posts">Posts</a></li> 
-  <li><a href="/comp3095/assignment1/admin.jsp">Admin</a></li> 
+  <li><a href="/comp3095/assignment2/AdminController">Admin</a></li> 
 </ul>   
 </div> 
 

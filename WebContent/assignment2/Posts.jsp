@@ -11,23 +11,19 @@
   </head>
 
   <body>
-    <%if(session.getAttribute( "user")!=null) { %>
+ 
       <div id="hmenu">
         <ul> Message Board
           <li><a href="/comp3095/assignment1/Home.html">Home</a></li>
           <li>
             <a href="/comp3095/assignment1/Posts">Posts</a>
           </li>
-          <li><a href="admin.jsp">Admin</a></li>
-          <%if(session.getAttribute( "user")!=null) { %>
+          <li><a href="/comp3095/assignment2/AdminController">Admin</a></li>
+    
             <li id="logged">Logged in as ${sessionScope.user}
               <a id="log" href="/comp3095/Logout"> Logout</a>
             </li>
-            <%}else{ %>
-              <li id="logged">
-                <a id="log" href="/comp3095/login.jsp"> Login</a>
-              </li>
-              <%} %>
+       
         </ul>
       </div>
       <div id="postDiv">
@@ -43,7 +39,6 @@
           ${createPost}
   
       </div>
-      <%}else{ response.sendRedirect( "Home.html");}%>
   </body>
 
   </html>

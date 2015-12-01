@@ -36,7 +36,7 @@
       <tr>
         <td class="test">Last Name</td>
         <td>
-          <input type="text" name="lastname" value="${cookie2}" ></input></br>
+          <input type="text" name="lastname" value="${cookie2}" ></input><br>
           <label>Must contain only alphabets. Spaces are not allowed.</label>
           <label>${errorLastName}</label>
         </td>
@@ -45,7 +45,7 @@
       <tr>
         <td class="test">E-mail Address</td>
         <td>
-          <input type="text" name="email" value="${cookie3}" ></input></br>
+          <input type="text" name="email" value="${cookie3}" ></input><br>
           <label>Must be a valid e-mail address</label>
           <label>${errorEmail}</label>
         </td>
@@ -54,7 +54,7 @@
       <tr>
         <td class="test">Re-Enter E-mail Address</td>
         <td>
-          <input type="text" name="reemail"></input></br>
+          <input type="text" name="reemail"></input><br>
           <label>Must be a valid e-mail address</label>
           <label>${errorReemail}</label>
         </td>
@@ -63,7 +63,7 @@
       <tr>
         <td class="test">Telephone #</td>
         <td>
-          <input type="text" name="phone" value="${cookie4}" ></input></br>
+          <input type="text" name="phone" value="${cookie4}" ></input><br>
           <label>Must only contain numbers.</label>
           <label>${errorPhone}</label>
         </td>
@@ -72,14 +72,14 @@
       <tr>
         <td class="test">Password</td>
         <td>
-          <input type="password" name="pass"></input></br>
+          <input type="password" name="pass"></input><br>
           <label>Your account password. Must contain at least one letter and number.</label>
           <label>${errorPass}</label>
       </tr>
       <tr>
         <td class="test">Re-Enter Password</td>
         <td>
-          <input type="password" name="repass"></input></br>
+          <input type="password" name="repass"></input><br>
           <label>Your account password. Must contain at least one letter and number.</label>
           <label>${errorRepass}</label>
       </tr>

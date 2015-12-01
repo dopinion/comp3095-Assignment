@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RemovePostAdmin
@@ -46,7 +45,7 @@ public class RemovePostAdmin extends HttpServlet {
 	
 		
 		RequestDispatcher requestDispatcher;
-		requestDispatcher = request.getRequestDispatcher("/assignment1/ShowAdminPost");
+		requestDispatcher = request.getRequestDispatcher("/assignment2/AdminController");
 		requestDispatcher.forward(request, response);
 	}
 

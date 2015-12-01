@@ -74,7 +74,7 @@ public class AdminController extends HttpServlet {
 		}
 		else
 		{
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("/comp3095/assignment1/login.jsp");
 		}
 	}
 

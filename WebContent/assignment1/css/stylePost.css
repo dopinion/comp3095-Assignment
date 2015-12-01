@@ -155,8 +155,7 @@ p.commentText{
 }
 a.commentOption{
 	display:inline;
-	position:relative;
-	left:85%;
+	float:right;
 	font-size:80%;
 }
 p.byText{

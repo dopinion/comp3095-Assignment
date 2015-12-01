@@ -1,9 +1,6 @@
 package assignment1;
 
-import java.awt.List;
-import java.sql.Array;
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +10,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Date;
@@ -52,13 +48,19 @@ public class ConnectionUtil {
 		Class.forName(driver);
 		Connection myConn = DriverManager.getConnection(url, "admin", "admin");
 		
-		//Create a sql Statement
-		Statement myStmt = myConn.createStatement();
-		
-		//Create prepared statement
 		DateFormat dateFormat = new SimpleDateFormat(" '-' yyyy/MM/dd '-' h:mmaaa");
 		Date date = new Date();
-		myStmt.executeUpdate("insert into comments(body, username, idPosts, date) values ('" + comment + "', '" + object.toString() + "', '" + id + "', '" + dateFormat.format(date).toString() + "')");
+	
+		//Lets create a prepared statement
+		PreparedStatement ps = myConn.prepareStatement("insert into comments(body, username, idPosts, date) values (?, ?, ?, ?)");
+				
+
+		ps.setString(1, comment);
+		ps.setString(2, object.toString());
+		ps.setLong(3, id);
+		ps.setString(4, dateFormat.format(date).toString());
+		
+		ps.executeUpdate();
 		myConn.close();
 	}
 	public void registerUser(String user,String password,String email,String telephone,String firstname,String lastname) throws SQLException, ClassNotFoundException

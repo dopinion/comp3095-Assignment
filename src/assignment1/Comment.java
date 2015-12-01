@@ -84,6 +84,10 @@ public class Comment extends HttpServlet {
 			
 			try {
 				ConnectionUtil util = new ConnectionUtil();
+				
+				//Unescape characters for SQL Injections 
+				
+				
 				util.insertComment(request.getParameter("commentbody"),session.getAttribute("user"), x);
 				
 				UtilityHelper helper = new UtilityHelper();
@@ -100,7 +104,7 @@ public class Comment extends HttpServlet {
 				
 				
 				RequestDispatcher requestDispatcher;
-				requestDispatcher = request.getRequestDispatcher("/assignment1/Posts.jsp");
+				requestDispatcher = request.getRequestDispatcher("/assignment2/Posts.jsp");
 				requestDispatcher.forward(request, response);
 			
 			}

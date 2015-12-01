@@ -17,7 +17,7 @@
           <li>
             <a href="/comp3095/assignment1/Posts">Posts</a>
           </li>
-          <li><a href="admin.jsp">Admin</a></li>
+          <li><a href="/comp3095/assignment2/AdminController">Admin</a></li>
           <%if(session.getAttribute( "user")!=null) { %>
             <li id="logged">Logged in as ${sessionScope.user}
               <a id="log" href="/comp3095/Logout"> Logout</a>

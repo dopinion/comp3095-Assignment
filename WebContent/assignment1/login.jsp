@@ -28,7 +28,7 @@
         <td>Username</td>
         <td>
           <input type="text" name="username"></input>
-          </br>
+          <br>
           <label>Your email address is your Username.</label>
         </td>
 
@@ -37,7 +37,7 @@
         <td>Password</td>
         <td>
           <input type="password" name="password"></input>
-          </br>
+          <br>
           <label>Your account password.</label>
         </td>
       </tr>

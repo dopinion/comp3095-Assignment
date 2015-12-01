@@ -1,11 +1,6 @@
 package assignment1;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.io.PrintWriter;
-import java.sql.Array;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 /**
  * Servlet implementation class Post

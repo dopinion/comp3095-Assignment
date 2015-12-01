@@ -1,11 +1,9 @@
 package assignment1;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
+
 
 
 public class UtilityHelper {
@@ -29,7 +27,6 @@ public class UtilityHelper {
 		String table = "<table class='postTable'>";
 		String finish = "";
 		String removeLink ="";
-		String commentLink ="";
 		String commentBuild = "";
 		
 		/*
@@ -64,10 +61,9 @@ public class UtilityHelper {
 				finish += table + tr + div + 
 				h4 + postList.get(i).get("title").toString() + "</h4> " + "<p class='byText'>by " + postList.get(i).get("username") + postList.get(i).get("date")  +"</p><hr>"+ "<p class='postText'>" +
 				postList.get(i).get("body") + "</p><hr>" +
-			     commentBuild + "</td></tr>" + tr + 
+			     commentBuild + "</td></tr>" + tr + removeLink +
 			     " <a class='commentOption' href='/comp3095/assignment1/Comment?id=" + postList.get(i).get("idPosts") + "'>Comment</a>" 
 				
-				+ removeLink
 						+ "</div></td></tr></table>";
 				
 				
@@ -98,7 +94,6 @@ public class UtilityHelper {
 		String table = "<table class='postTable'>";
 		String finish = "";
 		String removeLink ="";
-		String commentLink ="";
 		String commentBuild = "";
 
 		
@@ -123,10 +118,10 @@ public class UtilityHelper {
 				finish += table + tr + div + 
 				h4 + postList.get(i).get("title").toString() + "</h4> " + "<p class='byText'>by " + postList.get(i).get("username") + postList.get(i).get("date")  +"</p><hr>"+ "<p class='postText'>" +
 				postList.get(i).get("body") + "</p><hr>" +
-			     commentBuild + "</td></tr>" + tr + 
+			     commentBuild + "</td></tr>" + tr + removeLink +
 			     " <a class='commentOption' href='/comp3095/assignment1/Comment?id=" + postList.get(i).get("idPosts") + "'>Comment</a>" 
 				
-				+ removeLink
+				
 						+ "</div></td></tr></table>";
 				
 				
